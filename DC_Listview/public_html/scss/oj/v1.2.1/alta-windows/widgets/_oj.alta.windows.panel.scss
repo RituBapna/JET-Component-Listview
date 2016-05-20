@@ -1,0 +1,15 @@
+@import "../../utilities/oj.utilities";
+  
+
+
+// definitions in the common panel file
+@import "../../common/widgets/oj.common.panel"; 
+
+@if $includePanelClasses != false {
+  @include module-include-once("alta.windows.panel") {
+    
+    .oj-panel {
+      border-width: 2px;
+    }
+  }
+}

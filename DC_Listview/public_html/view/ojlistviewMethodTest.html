@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Listview Options Test</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="../js/libs/require/require.js"></script>
+        <script src="../js/masterVM/main/ojlistviewMain.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../css/libs/oj/v2.1.0/alta/oj-alta-min.css" type="text/css"/>
+        <link rel="stylesheet" href="../css/listview.css" type="text/css"/>
+        <!--        <script data-main="../js/ojlistviewVM/ojlistviewMain" src="../js/libs/require/require.js"></script>-->
+
+    </head>
+    <body>
+        <div id="contentSelectionwrapperDiv">
+            <div id="contentDiv" style="width:40%;float:left;margin-right:12px;"> 
+                <ul id="listview" aria-label="list with static hierarchical data" 
+                    data-bind="ojComponent: {component: 'ojListView', 
+                                        currentItem : currentItemValue,
+                                        drillMode:drillModeValue,
+                                        selectionMode:selectionModeValue,
+                                        groupHeaderPosition:groupHeaderPositionValue,
+                                        expanded: ['a', 'b'], item: {selectable: itemOnly},
+                                        rootAttributes: {style: 'width:100%;overflow-x:hidden;height:450px'}}">
+
+                    <li id="a">
+                        <span>A</span>
+                        <ul>
+                            <li id="amybartlet">
+                                <span class="avatar" style="background-image: url('../images/nBox/1.png')"></span>
+                                <div class="container">
+                                    <div>
+                                        <span class="name">Amy Bartlet</span>
+                                    </div>
+                                    <div>
+                                        <span class="oj-text-xs oj-text-secondary-color">Vice President</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="andyjones">
+                                <span class="avatar" style="background-image: url('../images/nBox/10.png')"></span>
+                                <div class="container">
+                                    <div>
+                                        <span class="name">Andy Jones</span>
+                                    </div>
+                                    <div>
+                                        <span class="oj-text-xs oj-text-secondary-color">Director</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="andrewbugsy">
+                                <span class="avatar" style="background-image: url('../images/nBox/11.png')"></span>
+                                <div class="container">
+                                    <div>
+                                        <span class="name">Andrew Bugsy</span>
+                                    </div>
+                                    <div>
+                                        <span class="oj-text-xs oj-text-secondary-color">Individual Contributer</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="annettbarnes">
+                                <span class="avatar" style="background-image: url('../images/nBox/2.png')"></span>
+                                <div class="container">
+                                    <div>
+                                        <span class="name">Annett Barnes</span>
+                                    </div>
+                                    <div>
+                                        <span class="oj-text-xs oj-text-secondary-color">Individual Contributer</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+                <ul id="indexer" aria-label="indexer" aria-controls="listview"  
+           data-bind="ojComponent: {component: 'ojIndexer', data: getIndexerModel(), rootAttributes: {class: 'demo-contacts-container-portrait oj-sm-flex-initial oj-flex-item'} }">
+        </ul>
+            </div>
+            <div id="selectionDiv" style="width:20%;float:left;margin-right:5px;"> 
+                <div  style="display: block-inline;">
+                    <input id="collapse" type="button"data-bind="click: collapseNode('a',true), 
+                      ojComponent: {component: 'ojButton', label: 'Collapse - A'}"/>
+
+                    <input id="expand" type="button"data-bind="click: expandNode('a'), 
+                      ojComponent: {component: 'ojButton', label: 'expand- A'}"/>
+                    <input id="expand" type="button"data-bind="click: getExpanded(), 
+                      ojComponent: {component: 'ojButton', label: 'Get Expanded'}"/>
+
+                </div>
+            </div>
+            <div id="outputText"> </div>
+        </div>
+        <div id="nestedLV"></div>
+</html>

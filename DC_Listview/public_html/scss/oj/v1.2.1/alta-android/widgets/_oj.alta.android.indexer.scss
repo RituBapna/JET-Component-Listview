@@ -1,0 +1,11 @@
+@import "../../utilities/oj.utilities";
+
+
+// import classes defined in the common directory
+@import "../../common/widgets/oj.common.indexer";
+
+@if $includeIndexerClasses != false {
+  @include module-include-once("alta.android.indexer") {
+
+  }
+}

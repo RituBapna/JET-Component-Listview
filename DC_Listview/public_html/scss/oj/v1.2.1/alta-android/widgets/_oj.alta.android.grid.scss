@@ -1,0 +1,12 @@
+@import "../../utilities/oj.utilities";
+
+
+
+// alta implementation currently in common
+@import "../../common/widgets/oj.common.grid"; 
+
+
+@if $includeGridClasses != false {
+  @include module-include-once("alta.android.grid") {
+  }
+}

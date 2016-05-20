@@ -1,0 +1,10 @@
+@import "../../utilities/oj.utilities";
+
+$includeTagsListClasses: $includeTagClasses !default;
+
+@import "../../common/widgets/oj.common.tags.lists"; 
+
+@if $includeTagsListClasses != false {
+  @include module-include-once("alta.ios.tagslist") {
+  }
+}

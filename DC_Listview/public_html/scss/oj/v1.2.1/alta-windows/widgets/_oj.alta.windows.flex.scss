@@ -1,0 +1,12 @@
+@import "../../utilities/oj.utilities";
+
+
+
+// alta implementation currently in common
+@import "../../common/widgets/oj.common.flex"; 
+
+
+@if $includeFlexClasses != false {
+  @include module-include-once("alta.windows.flex") {
+  }
+}

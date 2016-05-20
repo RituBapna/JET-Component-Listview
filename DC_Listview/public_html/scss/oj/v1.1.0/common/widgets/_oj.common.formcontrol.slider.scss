@@ -1,0 +1,245 @@
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// WARNING: do not directly import this file, instead import the 
+//          version in your base theme's directory, 
+//          for example alta/widgets/_oj.alta.formcontrol.slider.scss
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+@import "../../utilities/oj.utilities";
+@import "oj.common.formcontrol.mixins";
+
+@if $includeSliderClasses != false {
+  @include module-include-once("common.slider") {
+
+//
+// The oj-slider class defines the dimensions of a the slider
+// when embedded in a form control.
+//
+.oj-slider {
+  // relative position needed for correct sizing.
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  @include oj-box-sizing-property(border-box);
+
+  /* use a width of 100% and then max and min width so that when 
+     there's less room for the form control it can automatically 
+      get smaller instead of overflowing its boundaries */
+   max-width: $formControlLargeMaxWidth;
+   min-width: $formControlMinWidth;
+   width: 100%;
+}
+
+//
+//
+//
+.oj-slider.oj-slider-horizontal {
+  padding-left: $sliderThumbDiameter/2;
+  padding-right: $sliderThumbDiameter/2;
+}
+
+.oj-slider.oj-slider-vertical {
+  padding-left: $sliderThumbDiameter/2;
+  padding-right: $sliderThumbDiameter/2;
+  padding-top: $sliderThumbDiameter/2;
+  padding-bottom: $sliderThumbDiameter/2;
+}
+
+
+
+// Styling for invalid state
+.oj-invalid .oj-slider-wrapper {
+   border: $formControlMessagingBorderWidth solid $borderColorError !important; 
+}
+
+// Styling for warning state
+.oj-warning .oj-slider-wrapper {
+   border: $formControlMessagingBorderWidth solid $borderColorWarning !important; 
+}
+
+//
+// Define margins so that the slider thumb does not collide with adjacent html elements.
+// Form controls normally take care of the bottom margin, so we omit it here.
+//
+.oj-slider.oj-form-control {
+}
+
+.oj-slider-horizontal.oj-form-control .oj-slider-wrapper {
+  height: $formControlHeight;
+}
+
+.oj-slider-vertical.oj-form-control .oj-slider-wrapper {
+  height: 100%;
+  min-height: $sliderThumbDiameter*2;
+}
+
+//
+// oj-slider-wraper is the parent of the bar, barvalue, and the thumb.
+// It is used to create the proper spacing around the thumbs.
+//
+
+.oj-slider-wrapper {
+  position: relative;
+}
+
+//
+// Define a round slider thumb of diameter $sliderThumbDiameter
+//
+.oj-slider-thumb {
+  position: absolute;
+  @include oj-box-sizing-property(border-box);
+  width: $sliderThumbDiameter;
+  height: $sliderThumbDiameter;
+  cursor: default;
+  -ms-touch-action: none;
+  touch-action: none;
+  background-color: $sliderThumbBgColor;
+  @include oj-border-radius($sliderThumbBorderRadius);
+  border: $sliderThumbBorderWidth solid $sliderThumbBorderColor;
+}
+
+// Disabled sliders have invisible thumbs.
+.oj-disabled .oj-slider-thumb {
+   opacity: 0;
+}
+
+// Read only sliders have invisible thumbs.
+// todo: i think you're removing read only?
+.oj-read-only .oj-slider-thumb {
+   opacity: 0;
+}
+
+.oj-slider-range {
+   position: absolute;
+   // todo: is this needed?
+   opacity: 1.0;
+//       display: block;
+   border: 0;
+   background-position: 0 0;
+}
+
+//
+// The border-radius is set to the thickness of the bar.
+// The bar thickness is defined using width for vertical orientations,
+// and height for horizontal orientations. The bar thickness is applied
+// to both the slider-bar (which is the background, gray bar) and the 
+// bar value (the foreground, blue part of the bar).
+//
+.oj-slider-bar {
+   @include oj-border-radius($sliderBarThickness);
+   background-color: $sliderBarBgColor;
+   @include oj-box-sizing-property(border-box);
+   position: absolute;
+}
+
+// For vertical orientations, set the width of the slider-bar and the slider-bar-value
+.oj-slider-vertical .oj-slider-bar, .oj-slider-vertical .oj-slider-bar-value {
+   width: $sliderBarThickness;
+}
+
+// 
+// When vertical, the bar background is full height.
+//
+.oj-slider-vertical .oj-slider-bar {
+   height: 100%;
+}
+
+// When horizontal, the bar background is full width.
+//
+.oj-slider-horizontal .oj-slider-bar {
+   width: 100%;
+}
+
+// For horizontal orientations, set the width of the slider-bar and the slider-bar-value
+.oj-slider-horizontal .oj-slider-bar, .oj-slider-horizontal .oj-slider-bar-value {
+   height: $sliderBarThickness;
+   top: 50%;
+   margin-top: -$sliderBarThickness/2;
+}
+
+// oj-slider-bar-value represents the filled part of the slider bar
+.oj-slider-bar-value {
+   @include oj-border-radius($sliderBarThickness);
+   background: $sliderBarValueBgColor;	
+}
+
+.oj-disabled .oj-slider-bar-value {
+   background: $sliderBarValueBgColorDisabled;	
+}
+
+.oj-read-only .oj-slider-bar-value {
+   background: $sliderBarValueBgColorReadonly;	
+}
+
+.oj-slider-horizontal .oj-slider-thumb  {
+  top: 50%;
+  margin-top: -$sliderThumbDiameter/2;
+  margin-left: -$sliderThumbDiameter/2;
+}
+
+//
+// For horizontal sliders,
+// set the position of the value bar based on its range.
+//
+.oj-slider-horizontal .oj-slider-range-min {
+   left: 0;
+}
+.oj-slider-horizontal .oj-slider-range-max {
+   right: 0;
+}
+
+//
+// Expand the hit area of the slider bar.
+//
+.oj-slider:after {
+   content: '';
+   position: absolute;
+   top: -$sliderHitPadding;
+   bottom: -$sliderHitPadding;
+   left: -$sliderHitPadding;
+   right: -$sliderHitPadding;
+}
+
+.oj-slider-vertical .oj-slider-thumb {
+   margin-left: 0;
+   left: -$sliderThumbDiameter/2 + $sliderThumbBorderWidth;
+   margin-bottom: -$sliderThumbDiameter/2;
+}
+
+//
+// For vertical sliders,
+// set the position of the value bar based on its range.
+//
+.oj-slider-vertical .oj-slider-range-min {
+   bottom: 0;
+}
+.oj-slider-vertical .oj-slider-range-max {
+   top: 0;
+}
+
+.oj-slider-thumb.oj-hover {
+   background-color: $sliderThumbBgColorHover;
+}
+
+//
+// Expand the hit area of the slider thumb.
+//
+.oj-slider-thumb:after {
+   content:'';
+   position:absolute;
+   top: -$sliderThumbHitPadding;
+   bottom: -$sliderThumbHitPadding;
+   left: -$sliderThumbHitPadding;
+   right: -$sliderThumbHitPadding;
+}
+
+.oj-slider-thumb.oj-focus {
+   background-color: $sliderThumbBgColorFocus;
+}
+
+// active should trump hover
+.oj-slider-thumb.oj-active {
+   background-color: $sliderThumbBgColorActive;
+}
+
+ }
+}
